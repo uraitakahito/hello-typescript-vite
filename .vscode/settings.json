@@ -1,0 +1,22 @@
+// Settings file locations
+// Depending on your platform, the user settings file is located here:
+//   Windows %APPDATA%\Code\User\settings.json
+//   macOS $HOME/Library/Application\ Support/Code/User/settings.json
+//   Linux $HOME/.config/Code/User/settings.json
+{
+  // To actually start using the workspace version for IntelliSense,
+  // you **MUST RUN** the TypeScript: Select TypeScript Version command
+  // and select the workspace version.
+  // https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-newer-typescript-versions
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  //
+  // Prettier
+  //
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": false,
+
+  // https://code.visualstudio.com/docs/typescript/typescript-editing
+  "typescript.implementationsCodeLens.enabled": true,
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.suggest.autoImports": true,
+}
