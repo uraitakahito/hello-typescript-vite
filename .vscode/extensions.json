@@ -3,8 +3,6 @@
     //
     // JavaScript
     //
-    // https://marketplace.visualstudio.com/items?itemName=ChakrounAnas.turbo-console-log
-    "ChakrounAnas.turbo-console-log",
     // https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
     "dbaeumer.vscode-eslint",
     // https://marketplace.visualstudio.com/items?itemName=vitest.explorer
