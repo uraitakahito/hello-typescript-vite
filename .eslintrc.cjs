@@ -74,7 +74,7 @@ const namingRules = {
 module.exports = {
   root: true,
   parserOptions: {
-    project: './tsconfig.json',
+    project: './tsconfig.eslint.json',
   },
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   extends: [
@@ -98,7 +98,7 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['vitest.config.?(c|m)[jt]s'],
+      files: ['vite.config.?(c|m)[jt]s', 'vitest.config.?(c|m)[jt]s'],
       rules: {
         // https://typescript-eslint.io/rules/naming-convention/
         '@typescript-eslint/naming-convention': 'off',
