@@ -98,7 +98,7 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['vite.config.?(c|m)[jt]s', 'vitest.config.?(c|m)[jt]s'],
+      files: ['vite.config.*(c|m)?[jt]s', 'vitest.config.*(c|m)?[jt]s'],
       rules: {
         // https://typescript-eslint.io/rules/naming-convention/
         '@typescript-eslint/naming-convention': 'off',
