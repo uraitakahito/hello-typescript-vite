@@ -6,19 +6,25 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "html:lint": "markuplint \"./*.html\"",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "html:lint": "markuplint index.html \"src/**/*.html\"",
+    "clean": "npm run rmdir dist node_modules",
+    "cleandep": "npm run rmdir node_modules",
+    "rmdir": "node -e \"var fs = require('fs'); try{process.argv.slice(1).map((fpath) => fs.rmdirSync(fpath, { recursive: true }))}catch(err){console.log(err)}; process.exit(0);\""
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
-    "eslint": "^8.57.1",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-airbnb-typescript": "^18.0.0",
-    "eslint-plugin-import": "^2.31.0",
-    "markuplint": "^4.11.4",
-    "npm-check-updates": "^17.1.11",
-    "typescript": "^5.7.2",
-    "vite": "^6.0.2"
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.6.0",
+    "eslint": "^10.2.1",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import-x": "^4.16.2",
+    "markuplint": "^4.14.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "8.58.0",
+    "vite": "8.0.7"
+  },
+  "overrides": {
+    "minimatch": "^10.2.5"
   }
 }

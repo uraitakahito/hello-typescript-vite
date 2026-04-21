@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 
-export default defineConfig({
+const config = defineConfig({
   build: {
     rollupOptions: {
       input: {
@@ -17,3 +17,5 @@ export default defineConfig({
     minify: false,
   },
 });
+
+export default config;

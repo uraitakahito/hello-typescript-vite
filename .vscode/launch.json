@@ -1,0 +1,22 @@
+{
+  // https://code.visualstudio.com/docs/editor/debugging
+  // Debug the Vite-served browser app in Chrome.
+  // Prerequisite: start the dev server first with `npm run dev` (or the "Vite: dev" task).
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Chrome: Vite dev server",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Chrome: hoge page",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173/src/hoge.html",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}
