@@ -1,9 +1,32 @@
+## Development
+
 ```console
-% vite build
-% docker run -d --init --rm -p 8080:80 --mount type=bind,src=`pwd`/dist,dst=/usr/share/nginx/html --name nginx-container nginx
+npm ci
+npm run dev
 ```
 
-Go to http://localhost:8080 and you should see the app running.
+Open http://localhost:5173 to see the main page, and http://localhost:5173/src/hoge.html for the `hoge` entry.
+
+## Lint
+
+```console
+npm run lint       # ESLint (flat config)
+npm run html:lint  # markuplint for HTML files
+```
+
+## Production (Docker)
+
+Build and run the static site via nginx.
+
+```console
+PROJECT=$(basename `pwd`)
+docker image build -f Dockerfile.prod -t ${PROJECT}-prod-image .
+docker container run --rm -p 8080:80 --name ${PROJECT}-prod-container ${PROJECT}-prod-image
+```
+
+Open http://localhost:8080.
+
+See `Dockerfile.prod` header for details. `Dockerfile.dev` is a separate development-container image (Debian + user tools) and is not used for serving the app.
 
 ## NOTE
 

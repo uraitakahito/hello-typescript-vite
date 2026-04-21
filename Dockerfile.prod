@@ -1,0 +1,35 @@
+# Features of this Dockerfile
+#
+# - Multi-stage build: installs npm dependencies and builds the Vite app in a build stage,
+#   then copies the static output into an nginx runtime image.
+# - Runtime is nginx:alpine serving the built assets from /usr/share/nginx/html.
+#
+# Build the Docker image:
+#
+#   PROJECT=$(basename `pwd`) && docker image build -f Dockerfile.prod -t $PROJECT-prod-image .
+#
+# Run the Docker container:
+#
+#   docker container run --rm -p 8080:80 --name $PROJECT-prod-container $PROJECT-prod-image
+#
+# Then open http://localhost:8080
+
+# --- Build stage ---
+FROM node:24-bookworm-slim AS build
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY tsconfig.json vite.config.mts index.html ./
+COPY src/ src/
+COPY public/ public/
+RUN npm run build
+
+# --- Runtime stage ---
+FROM nginx:alpine
+
+COPY --from=build /app/dist /usr/share/nginx/html
+
+EXPOSE 80

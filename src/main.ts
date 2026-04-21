@@ -1,9 +1,12 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import './style.css';
+import typescriptLogo from './typescript.svg';
+import viteLogo from '/vite.svg';
+import { setupCounter } from './counter';
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+const appEl = document.querySelector<HTMLDivElement>('#app');
+if (!appEl) throw new Error('#app element not found');
+
+appEl.innerHTML = `
   <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="${viteLogo}" class="logo" alt="Vite logo" />
@@ -19,6 +22,8 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       Click on the Vite and TypeScript logos to learn more
     </p>
   </div>
-`
+`;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const counterEl = document.querySelector<HTMLButtonElement>('#counter');
+if (!counterEl) throw new Error('#counter element not found');
+setupCounter(counterEl);
