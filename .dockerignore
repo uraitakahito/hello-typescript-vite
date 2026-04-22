@@ -9,3 +9,4 @@
 !index.html
 !src/
 !public/
+!docker-entrypoint.sh

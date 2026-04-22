@@ -20,3 +20,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Docker files
+Dockerfile.dev
+docker-entrypoint.sh

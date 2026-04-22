@@ -1,7 +1,12 @@
 {
+  //
   // https://code.visualstudio.com/docs/editor/debugging
   // Debug the Vite-served browser app in Chrome.
-  // Prerequisite: start the dev server first with `npm run dev` (or the "Vite: dev" task).
+  //
+  // **************************************************************************************
+  // PREREQUISITE: start the dev server first with `npm run dev` (or the "Vite: dev" task).
+  // **************************************************************************************
+  //
   "version": "0.2.0",
   "configurations": [
     {

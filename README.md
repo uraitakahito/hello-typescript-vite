@@ -1,11 +1,61 @@
 ## Development
 
-```console
+Assumes the host is macOS with Docker Desktop.
+
+### 1. Download the Dockerfile and entrypoint
+
+```sh
+curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/tags/1.2.5/Dockerfile.dev
+curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/tags/1.2.5/docker-entrypoint.sh
+chmod 755 docker-entrypoint.sh
+```
+
+### 2. Build the image
+
+```sh
+PROJECT=$(basename `pwd`) && docker image build -f Dockerfile.dev -t $PROJECT-image . --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g`
+```
+
+### 3. (First time only) Create a volume for shell history
+
+```sh
+docker volume create $PROJECT-zsh-history
+```
+
+### 4. Start the container
+
+`-p 5173:5173` publishes the Vite dev server port so the page is reachable from the host. The `ssh-auth.sock` mount is the Docker Desktop for Mac virtual socket used to forward the host ssh-agent.
+
+```sh
+docker container run -d --rm --init -p 5173:5173 -v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock -e GH_TOKEN=$(gh auth token) --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
+```
+
+### 5. Attach to the container via VS Code
+
+1. Open **Command Palette** (Shift + Command + P)
+2. Select **Dev Containers: Attach to Running Container**
+3. Open the `/app` directory
+
+See the [VS Code documentation](https://code.visualstudio.com/docs/devcontainers/attach-container#_attach-to-a-docker-container) for details.
+
+### 6. (First time only) Fix history volume ownership
+
+Inside the container:
+
+```sh
+sudo chown -R $(id -u):$(id -g) /zsh-volume
+```
+
+### 7. Install dependencies and start the dev server
+
+Inside the container:
+
+```sh
 npm ci
 npm run dev
 ```
 
-Open http://localhost:5173 to see the main page, and http://localhost:5173/src/hoge.html for the `hoge` entry.
+Open http://localhost:5173/ on the host to see the main page, and http://localhost:5173/src/hoge.html for the `hoge` entry.
 
 ## Lint
 
@@ -26,7 +76,7 @@ docker container run --rm -p 8080:80 --name ${PROJECT}-prod-container ${PROJECT}
 
 Open http://localhost:8080.
 
-See `Dockerfile.prod` header for details. `Dockerfile.dev` is a separate development-container image (Debian + user tools) and is not used for serving the app.
+See `Dockerfile.prod` header for details.
 
 ## NOTE
 
