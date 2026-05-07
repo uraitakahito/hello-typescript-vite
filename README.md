@@ -51,7 +51,6 @@ docker compose -f compose.dev.yaml down
 
 ```console
 npm run lint       # ESLint (flat config)
-npm run html:lint  # markuplint for HTML files
 ```
 
 ## Production (Docker)

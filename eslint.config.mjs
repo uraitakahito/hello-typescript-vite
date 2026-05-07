@@ -6,7 +6,7 @@ import importXPlugin from 'eslint-plugin-import-x';
 
 export default defineConfig(
   {
-    ignores: ['dist/**', 'eslint.config.mjs', 'node_modules/**', '.markuplintrc.js'],
+    ignores: ['dist/**', 'eslint.config.mjs', 'node_modules/**', '.Trash-*/**'],
   },
 
   eslint.configs.recommended,

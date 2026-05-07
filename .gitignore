@@ -25,3 +25,6 @@ dist-ssr
 Dockerfile.dev
 docker-entrypoint.sh
 .env
+
+# trash-cli (dotfiles aliases rm to trash-put)
+.Trash-*
