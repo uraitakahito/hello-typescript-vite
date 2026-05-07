@@ -24,3 +24,4 @@ dist-ssr
 # Docker files
 Dockerfile.dev
 docker-entrypoint.sh
+.env

@@ -1,0 +1,5 @@
+# Ignore everything
+*
+
+# Allow only files needed for Docker build
+!docker-entrypoint.sh

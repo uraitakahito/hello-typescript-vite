@@ -1,0 +1,27 @@
+services:
+  hello-typescript-vite:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        user_id: ${USER_ID}
+        group_id: ${GROUP_ID}
+        TZ: ${TZ:-Asia/Tokyo}
+    container_name: hello-typescript-vite-container
+    init: true
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - zsh-history:/zsh-volume
+      - /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock
+    environment:
+      - SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
+      - TERM=${TERM}
+      - GH_TOKEN=${GH_TOKEN}
+    tty: true
+    stdin_open: true
+
+volumes:
+  zsh-history:
+    name: hello-typescript-vite-zsh-history
