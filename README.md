@@ -2,43 +2,31 @@
 
 Assumes the host is macOS with Docker Desktop.
 
-### 1. Download the Dockerfile and entrypoint
+### 1. Run setup (first time / after `hello-javascript` tag bump)
 
 ```sh
-curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/tags/1.2.9/Dockerfile.dev
-curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/tags/1.2.9/docker-entrypoint.sh
-chmod 755 docker-entrypoint.sh
+./setup.sh
 ```
 
-### 2. Build the image
+Fetches `Dockerfile.dev` and `docker-entrypoint.sh` from `uraitakahito/hello-javascript@1.2.9` and writes a local `.env` (`USER_ID` / `GROUP_ID` / `TZ`).
+
+### 2. Start the dev stack
 
 ```sh
-PROJECT=$(basename `pwd`) && docker image build -f Dockerfile.dev -t $PROJECT-image . --build-arg TZ=Asia/Tokyo --build-arg user_id=`id -u` --build-arg group_id=`id -g`
+GH_TOKEN=$(gh auth token) docker compose -f compose.dev.yaml up -d --build
 ```
 
-### 3. (First time only) Create a volume for shell history
+`GH_TOKEN` is intentionally not stored in `.env`; pass it via prefix every time. Omitting it just leaves `gh` / Claude Code unauthenticated inside the container.
+
+### 3. Attach to the container
+
+Either attach VS Code via **Command Palette → "Dev Containers: Attach to Running Container"** → pick `hello-typescript-vite-container` → open `/app`, or use a shell:
 
 ```sh
-docker volume create $PROJECT-zsh-history
+docker exec -it hello-typescript-vite-container zsh
 ```
 
-### 4. Start the container
-
-`-p 5173:5173` publishes the Vite dev server port so the page is reachable from the host. The `ssh-auth.sock` mount is the Docker Desktop for Mac virtual socket used to forward the host ssh-agent.
-
-```sh
-docker container run -d --rm --init -p 5173:5173 -v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock -e GH_TOKEN=$(gh auth token) --mount type=bind,src=`pwd`,dst=/app --mount type=volume,source=$PROJECT-zsh-history,target=/zsh-volume --name $PROJECT-container $PROJECT-image
-```
-
-### 5. Attach to the container via VS Code
-
-1. Open **Command Palette** (Shift + Command + P)
-2. Select **Dev Containers: Attach to Running Container**
-3. Open the `/app` directory
-
-See the [VS Code documentation](https://code.visualstudio.com/docs/devcontainers/attach-container#_attach-to-a-docker-container) for details.
-
-### 6. (First time only) Fix history volume ownership
+### 4. (First time only) Fix history volume ownership
 
 Inside the container:
 
@@ -46,7 +34,7 @@ Inside the container:
 sudo chown -R $(id -u):$(id -g) /zsh-volume
 ```
 
-### 7. Install dependencies and start the dev server
+### 5. Install dependencies and start the dev server
 
 Inside the container:
 
@@ -56,6 +44,12 @@ npm run dev
 ```
 
 Open http://localhost:5173/ on the host to see the main page, and http://localhost:5173/src/hoge.html for the `hoge` entry.
+
+### Stop
+
+```sh
+docker compose -f compose.dev.yaml down
+```
 
 ## Lint
 
