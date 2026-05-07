@@ -8,15 +8,11 @@ Assumes the host is macOS with Docker Desktop.
 ./setup.sh
 ```
 
-Fetches `Dockerfile.dev` and `docker-entrypoint.sh` from `uraitakahito/hello-javascript@1.2.9` and writes a local `.env` (`USER_ID` / `GROUP_ID` / `TZ`).
-
 ### 2. Start the dev stack
 
 ```sh
 GH_TOKEN=$(gh auth token) docker compose -f compose.dev.yaml up -d --build
 ```
-
-`GH_TOKEN` is intentionally not stored in `.env`; pass it via prefix every time. Omitting it just leaves `gh` / Claude Code unauthenticated inside the container.
 
 ### 3. Attach to the container
 
@@ -54,8 +50,7 @@ docker compose -f compose.dev.yaml down
 ## Lint
 
 ```console
-npm run lint       # ESLint (flat config)
-npm run html:lint  # markuplint for HTML files
+npm run lint
 ```
 
 ## Production (Docker)
