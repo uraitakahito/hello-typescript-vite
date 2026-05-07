@@ -8,8 +8,6 @@ Assumes the host is macOS with Docker Desktop.
 ./setup.sh
 ```
 
-Fetches `Dockerfile.dev` and `docker-entrypoint.sh` from `uraitakahito/hello-javascript@1.2.9` and writes a local `.env` (`USER_ID` / `GROUP_ID` / `TZ`).
-
 ### 2. Start the dev stack
 
 ```sh
