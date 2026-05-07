@@ -5,8 +5,8 @@ Assumes the host is macOS with Docker Desktop.
 ### 1. Download the Dockerfile and entrypoint
 
 ```sh
-curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/tags/1.2.5/Dockerfile.dev
-curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/tags/1.2.5/docker-entrypoint.sh
+curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/tags/1.2.9/Dockerfile.dev
+curl -L -O https://raw.githubusercontent.com/uraitakahito/hello-javascript/refs/tags/1.2.9/docker-entrypoint.sh
 chmod 755 docker-entrypoint.sh
 ```
 
