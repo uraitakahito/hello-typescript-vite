@@ -14,8 +14,6 @@ Assumes the host is macOS with Docker Desktop.
 GH_TOKEN=$(gh auth token) docker compose -f compose.dev.yaml up -d --build
 ```
 
-`GH_TOKEN` is intentionally not stored in `.env`; pass it via prefix every time. Omitting it just leaves `gh` / Claude Code unauthenticated inside the container.
-
 ### 3. Attach to the container
 
 Either attach VS Code via **Command Palette → "Dev Containers: Attach to Running Container"** → pick `hello-typescript-vite-container` → open `/app`, or use a shell:
