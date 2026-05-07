@@ -50,7 +50,7 @@ docker compose -f compose.dev.yaml down
 ## Lint
 
 ```console
-npm run lint       # ESLint (flat config)
+npm run lint
 ```
 
 ## Production (Docker)
