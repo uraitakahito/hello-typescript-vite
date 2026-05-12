@@ -57,15 +57,17 @@ npm run lint
 
 Build and run the static site via nginx.
 
-```console
-PROJECT=$(basename `pwd`)
-docker image build -f Dockerfile.prod -t ${PROJECT}-prod-image .
-docker container run --rm -p 8080:80 --name ${PROJECT}-prod-container ${PROJECT}-prod-image
+```sh
+docker compose -f compose.prod.yaml up -d --build
 ```
 
 Open http://localhost:8080.
 
-See `Dockerfile.prod` header for details.
+### Stop
+
+```sh
+docker compose -f compose.prod.yaml down
+```
 
 ## NOTE
 
