@@ -1,72 +1,25 @@
-## Development
+## Setup
 
-Assumes the host is macOS with Docker Desktop.
+### Prerequisites
 
-### 1. Run setup (first time / after `hello-javascript` tag bump)
+Run the setup script:
 
 ```sh
 ./setup.sh
 ```
 
-### 2. Start the dev stack
+### Development Environment
 
-```sh
-GH_TOKEN=$(gh auth token) docker compose -f compose.dev.yaml up -d --build
-```
+See [docs/development-environment.md](docs/development-environment.md).
 
-### 3. Attach to the container
+### Production Environment
 
-Either attach VS Code via **Command Palette → "Dev Containers: Attach to Running Container"** → pick `hello-typescript-vite-container` → open `/app`, or use a shell:
-
-```sh
-docker exec -it hello-typescript-vite-container zsh
-```
-
-### 4. (First time only) Fix history volume ownership
-
-Inside the container:
-
-```sh
-sudo chown -R $(id -u):$(id -g) /zsh-volume
-```
-
-### 5. Install dependencies and start the dev server
-
-Inside the container:
-
-```sh
-npm ci
-npm run dev
-```
-
-Open http://localhost:5173/ on the host to see the main page, and http://localhost:5173/src/hoge.html for the `hoge` entry.
-
-### Stop
-
-```sh
-docker compose -f compose.dev.yaml down
-```
+See [docs/production-environment.md](docs/production-environment.md).
 
 ## Lint
 
 ```console
 npm run lint
-```
-
-## Production (Docker)
-
-Build and run the static site via nginx.
-
-```sh
-docker compose -f compose.prod.yaml up -d --build
-```
-
-Open http://localhost:8080.
-
-### Stop
-
-```sh
-docker compose -f compose.prod.yaml down
 ```
 
 ## NOTE
