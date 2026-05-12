@@ -1,3 +1,5 @@
+name: hello-typescript-vite-dev
+
 services:
   hello-typescript-vite:
     build:

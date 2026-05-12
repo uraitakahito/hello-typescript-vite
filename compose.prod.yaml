@@ -1,0 +1,23 @@
+name: hello-typescript-vite-prod
+
+services:
+  hello-typescript-vite:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    image: hello-typescript-vite:prod
+    container_name: hello-typescript-vite-prod
+    init: true
+    ports:
+      - "8080:80"
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
